@@ -460,16 +460,8 @@
     <!-- 把 src 里的 https://www.youtube.com/embed/XXXXXXX 换成你的视频链接 -->
     <!-- B站格式：https://player.bilibili.com/player.html?bvid=你的BV号&page=1 -->
     <div class="video-card">
-      <!--
-      <iframe src="https://player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1"
-        scrolling="no" allowfullscreen></iframe>
-      -->
-      <div class="video-placeholder">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
-        <span>替换为你的主视频 · 推荐B站嵌入</span>
-      </div>
+      <iframe src="https://player.bilibili.com/player.html?bvid=BV1kg4y1U7u4&page=1"
+        scrolling="no" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>
       <div class="video-overlay">
         <span class="video-tag">主打作品 · Featured</span>
         <p class="video-title-text">作品标题 一</p>
@@ -636,7 +628,7 @@
   <p class="section-label reveal" style="justify-content:center">Contact</p>
   <h2 class="section-title reveal" style="text-align:center">期待<em>合作</em></h2>
   <!-- 把 your@email.com 改成你的邮箱 -->
-  <a class="contact-email reveal" href="mailto:your@email.com">your@email.com</a>
+  <a class="contact-email reveal" href="/cdn-cgi/l/email-protection#92ebfde7e0d2f7fff3fbfebcf1fdff"><span class="__cf_email__" data-cfemail="e29b8d9790a2878f838b8ecc818d8f">[email&#160;protected]</span></a>
   <p class="contact-desc reveal">欢迎HR和品牌方探讨合作 · 工作意向请发邮件或微信联系</p>
   <div class="social-links reveal">
     <a href="#">微信 WeChat</a>
@@ -653,7 +645,7 @@
   <span>Made with ♥</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Cursor ──
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -704,11 +696,4 @@
 
   // ── Smooth scroll ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-    });
-  });
-</script>
-</body>
-</html>
+    
