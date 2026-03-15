@@ -3,421 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>&#20316;&#21697;&#38598; &#183; Portfolio</title>
+<title>Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0a1628;
-    --navy-mid: #0f2044;
-    --navy-light: #1a3060;
-    --gold: #c9a84c;
-    --gold-bright: #e8c96e;
-    --gold-pale: #f0dfa0;
-    --cream: #f5edd8;
-    --white: #faf8f2;
-    --text-dim: rgba(201,168,76,0.45);
-  }
+:root{
+  --navy:#0a1628;--navy-mid:#0f2044;--gold:#c9a84c;
+  --gold-bright:#e8c96e;--gold-pale:#f0dfa0;
+  --cream:#f5edd8;--white:#faf8f2;--dim:rgba(201,168,76,0.45);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:'Noto Serif SC',serif;overflow-x:hidden;cursor:none}
+.cursor{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s;mix-blend-mode:screen}
+.cursor-ring{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .15s,top .15s,width .3s,height .3s;opacity:.6}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;background:linear-gradient(to bottom,rgba(10,22,40,.95),transparent);backdrop-filter:blur(2px)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.15em;color:var(--gold);text-decoration:none}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);text-decoration:none;opacity:.7;transition:opacity .3s,color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{opacity:1;color:var(--gold)}
+.nav-links a:hover::after{width:100%}
 
-  html { scroll-behavior: smooth; }
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 60px;position:relative;z-index:1;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(26,48,96,.8),transparent 70%);top:-100px;right:-100px;animation:drift1 12s ease-in-out infinite}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(201,168,76,.12),transparent 70%);bottom:0;left:30%;animation:drift2 15s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-30px)}}
+.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:0;animation:fadeUp 1s ease .3s forwards}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(64px,10vw,130px);font-weight:300;line-height:.9;color:var(--white);margin-top:16px;opacity:0;animation:fadeUp 1s ease .5s forwards}
+.hero-name em{font-style:italic;color:var(--gold);display:block}
+.hero-sub{font-size:15px;letter-spacing:.08em;color:var(--cream);opacity:0;margin-top:28px;max-width:420px;line-height:1.9;animation:fadeUp 1s ease .7s forwards}
+.hero-line{width:80px;height:1px;background:var(--gold);margin-top:40px;opacity:0;animation:expandLine 1s ease .9s forwards}
+.hero-scroll{position:absolute;bottom:40px;left:60px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);opacity:0;animation:fadeUp 1s ease 1.2s forwards}
+.scroll-line{width:40px;height:1px;background:var(--gold);opacity:.4;animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{width:40px}50%{width:60px}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes expandLine{from{opacity:0;width:0}to{opacity:1;width:80px}}
 
-  body {
-    background: var(--navy);
-    color: var(--cream);
-    font-family: 'Noto Serif SC', serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* SECTION */
+section{position:relative;z-index:1;padding:100px 60px}
+.sec-label{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:16px}
+.sec-label::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:60px}
+.sec-title em{font-style:italic;color:var(--gold)}
+.divider{width:calc(100% - 120px);margin:0 60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25}
 
-  /* ── Custom Cursor ── */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s;
-    mix-blend-mode: screen;
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.3s, height 0.3s, opacity 0.3s;
-    opacity: 0.6;
-  }
+/* =====================
+   VIDEO LAYOUT
+   Desktop: 2x2 mixed grid
+   Left col: 2 vertical (9:16) stacked
+   Right col: 2 horizontal (16:9) stacked
+   ===================== */
+.video-section{}
+.video-mixed-grid{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  grid-template-rows:auto auto;
+  gap:4px;
+}
 
-  /* ── Background grain + grid ── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none; z-index: 0;
-  }
-  body::after {
-    content: '';
-    position: fixed; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.4;
-  }
+/* Vertical cards - left column, each stacked */
+.video-card-vertical{
+  position:relative;overflow:hidden;
+  aspect-ratio:9/16;
+  background:var(--navy-mid);
+}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 60px;
-    background: linear-gradient(to bottom, rgba(10,22,40,0.95), transparent);
-    backdrop-filter: blur(2px);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 300; letter-spacing: 0.15em;
-    color: var(--gold);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a {
-    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--cream); text-decoration: none; opacity: 0.7;
-    transition: opacity 0.3s, color 0.3s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { opacity: 1; color: var(--gold); }
-  .nav-links a:hover::after { width: 100%; }
+/* Horizontal cards - right column */
+.video-card-horizontal{
+  position:relative;overflow:hidden;
+  aspect-ratio:16/9;
+  background:var(--navy-mid);
+}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 0 60px;
-    position: relative; z-index: 1;
-    overflow: hidden;
-  }
-  .hero-bg-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-  }
-  .orb1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(26,48,96,0.8), transparent 70%);
-    top: -100px; right: -100px;
-    animation: drift1 12s ease-in-out infinite;
-  }
-  .orb2 {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
-    bottom: 0; left: 30%;
-    animation: drift2 15s ease-in-out infinite;
-  }
-  @keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px)} }
-  @keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-30px)} }
+.video-card-vertical iframe,
+.video-card-horizontal iframe{
+  width:100%;height:100%;border:none;display:block;
+}
 
-  .hero-eyebrow {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px; letter-spacing: 0.35em; text-transform: uppercase;
-    color: var(--gold); opacity: 0;
-    animation: fadeUp 1s ease 0.3s forwards;
-  }
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(64px, 10vw, 130px);
-    font-weight: 300; line-height: 0.9;
-    color: var(--white); margin-top: 16px;
-    opacity: 0; animation: fadeUp 1s ease 0.5s forwards;
-  }
-  .hero-name em {
-    font-style: italic; color: var(--gold);
-    display: block;
-  }
-  .hero-subtitle {
-    font-size: 15px; letter-spacing: 0.08em;
-    color: var(--cream); opacity: 0;
-    margin-top: 28px; max-width: 420px; line-height: 1.9;
-    animation: fadeUp 1s ease 0.7s forwards;
-  }
-  .hero-line {
-    width: 80px; height: 1px; background: var(--gold);
-    margin-top: 40px; opacity: 0;
-    animation: expandLine 1s ease 0.9s forwards;
-  }
-  .hero-scroll {
-    position: absolute; bottom: 40px; left: 60px;
-    display: flex; align-items: center; gap: 12px;
-    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--text-dim); opacity: 0;
-    animation: fadeUp 1s ease 1.2s forwards;
-  }
-  .hero-scroll-line {
-    width: 40px; height: 1px; background: var(--gold); opacity: 0.4;
-    animation: scrollPulse 2s ease-in-out infinite;
-  }
-  @keyframes scrollPulse { 0%,100%{width:40px} 50%{width:60px} }
+/* Placeholder styling */
+.video-ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;color:var(--dim);font-size:11px;letter-spacing:.2em;
+  background:var(--navy-mid);
+}
+.video-ph svg{opacity:.25}
+.video-ph .ph-label{text-transform:uppercase}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes expandLine {
-    from { opacity: 0; width: 0; }
-    to { opacity: 1; width: 80px; }
-  }
+/* Overlay */
+.video-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,22,40,.85) 0%,transparent 55%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px 24px;
+  transition:opacity .4s;
+  pointer-events:none;
+}
+.video-card-vertical:hover .video-overlay,
+.video-card-horizontal:hover .video-overlay{opacity:0}
+.video-card-vertical::after,
+.video-card-horizontal::after{
+  content:'';position:absolute;inset:0;
+  border:1px solid transparent;
+  transition:border-color .4s;pointer-events:none;
+}
+.video-card-vertical:hover::after,
+.video-card-horizontal:hover::after{border-color:var(--gold)}
+.vtag{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.vtitle{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--white)}
 
-  /* ── SECTION BASE ── */
-  section { position: relative; z-index: 1; padding: 100px 60px; }
-  .section-label {
-    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .section-label::before {
-    content: ''; display: block;
-    width: 32px; height: 1px; background: var(--gold);
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 5vw, 60px); font-weight: 300;
-    color: var(--white); line-height: 1.1; margin-bottom: 60px;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
+/* Left column: 2 vertical cards stacked */
+.vcol-left{display:flex;flex-direction:column;gap:4px}
+/* Right column: 2 horizontal cards stacked */
+.vcol-right{display:flex;flex-direction:column;gap:4px}
 
-  /* ── VIDEO GRID ── */
-  .video-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-  }
-  .video-card {
-    position: relative; overflow: hidden;
-    aspect-ratio: 16/9;
-    background: var(--navy-mid);
-    cursor: pointer;
-  }
-  .video-card:first-child {
-    grid-column: 1 / -1;
-    aspect-ratio: 21/9;
-  }
-  .video-card iframe {
-    width: 100%; height: 100%; border: none;
-    display: block;
-  }
-  .video-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,22,40,0.8) 0%, transparent 50%);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 28px 32px;
-    transition: opacity 0.4s;
-  }
-  .video-card:hover .video-overlay { opacity: 0; }
-  .video-tag {
-    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 6px;
-  }
-  .video-title-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 300; color: var(--white);
-  }
-  .video-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    border: 1px solid transparent;
-    transition: border-color 0.4s;
-    pointer-events: none;
-  }
-  .video-card:hover::after { border-color: var(--gold); }
+/* POSTER GRID */
+.poster-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.poster-card{position:relative;overflow:hidden;aspect-ratio:2/3;background:var(--navy-mid);transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.poster-card:hover{transform:translateY(-8px)}
+.poster-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;filter:saturate(.8) brightness(.9)}
+.poster-card:hover img{transform:scale(1.05);filter:saturate(1) brightness(1)}
+.poster-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--navy-mid);gap:10px;color:var(--dim);font-size:11px;letter-spacing:.2em}
+.poster-ph svg{opacity:.25}
+.poster-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,.9) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;transform:translateY(8px);transition:transform .4s}
+.poster-card:hover .poster-overlay{transform:translateY(0)}
+.pnum{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.3em;color:var(--gold);margin-bottom:4px}
+.ptitle{font-size:13px;font-weight:300;color:var(--white);letter-spacing:.05em}
 
-  /* ── PLACEHOLDER ── */
-  .video-placeholder {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    background: var(--navy-mid);
-    color: var(--text-dim);
-    font-size: 12px; letter-spacing: 0.2em;
-    gap: 12px;
-  }
-  .video-placeholder svg { opacity: 0.3; }
+/* ABOUT */
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-text p{font-size:15px;line-height:2.1;color:rgba(245,237,216,.8);margin-bottom:24px}
+.about-text p strong{color:var(--gold);font-weight:400}
+.skills{display:flex;flex-direction:column;gap:20px}
+.skill-row{display:flex;flex-direction:column;gap:8px}
+.skill-lbl{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);opacity:.6}
+.skill-bar{height:1px;background:rgba(201,168,76,.15);position:relative;overflow:hidden}
+.skill-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));width:0;transition:width 1.5s cubic-bezier(.16,1,.3,1)}
 
-  /* ── POSTER GRID ── */
-  .poster-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-  .poster-card {
-    position: relative; overflow: hidden;
-    aspect-ratio: 2/3;
-    background: var(--navy-mid);
-    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-  }
-  .poster-card:hover { transform: translateY(-8px); }
-  .poster-card img {
-    width: 100%; height: 100%; object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
-    filter: saturate(0.8) brightness(0.9);
-  }
-  .poster-card:hover img { transform: scale(1.05); filter: saturate(1) brightness(1); }
-  .poster-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,22,40,0.9) 0%, transparent 55%);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 20px;
-    transform: translateY(8px);
-    transition: transform 0.4s;
-  }
-  .poster-card:hover .poster-overlay { transform: translateY(0); }
-  .poster-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px; letter-spacing: 0.3em;
-    color: var(--gold); margin-bottom: 4px;
-  }
-  .poster-title-text {
-    font-size: 13px; font-weight: 300; color: var(--white);
-    letter-spacing: 0.05em;
-  }
-  .poster-placeholder {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    background: var(--navy-mid);
-    gap: 10px; color: var(--text-dim);
-    font-size: 11px; letter-spacing: 0.2em;
-  }
-  .poster-placeholder svg { opacity: 0.25; }
+/* CONTACT */
+.contact-section{text-align:center}
+.contact-email{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,56px);font-weight:300;color:var(--gold-pale);text-decoration:none;letter-spacing:.05em;display:inline-block;position:relative;transition:color .3s}
+.contact-email::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.contact-email:hover{color:var(--gold)}
+.contact-email:hover::after{transform:scaleX(1)}
+.contact-desc{font-size:13px;letter-spacing:.15em;color:var(--dim);margin-top:20px}
+.social-links{display:flex;justify-content:center;gap:32px;margin-top:48px}
+.social-links a{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--cream);opacity:.4;text-decoration:none;transition:opacity .3s,color .3s}
+.social-links a:hover{opacity:1;color:var(--gold)}
 
-  /* ── ABOUT ── */
-  .about-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px; align-items: start;
-  }
-  .about-text p {
-    font-size: 15px; line-height: 2.1;
-    color: rgba(245,237,216,0.8);
-    margin-bottom: 24px;
-  }
-  .about-text p strong { color: var(--gold); font-weight: 400; }
-  .about-skills { display: flex; flex-direction: column; gap: 20px; }
-  .skill-row { display: flex; flex-direction: column; gap: 8px; }
-  .skill-label {
-    display: flex; justify-content: space-between;
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--cream); opacity: 0.6;
-  }
-  .skill-bar {
-    height: 1px; background: rgba(201,168,76,0.15);
-    position: relative; overflow: hidden;
-  }
-  .skill-fill {
-    position: absolute; top: 0; left: 0; height: 100%;
-    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
-    width: 0; transition: width 1.5s cubic-bezier(0.16,1,0.3,1);
-  }
+/* FOOTER */
+footer{position:relative;z-index:1;padding:32px 60px;border-top:1px solid rgba(201,168,76,.1);display:flex;justify-content:space-between;align-items:center}
+footer span{font-size:11px;letter-spacing:.2em;color:var(--dim)}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--gold);opacity:.5;letter-spacing:.15em}
 
-  /* ── CONTACT ── */
-  .contact-section { text-align: center; }
-  .contact-email {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 5vw, 60px); font-weight: 300;
-    color: var(--gold-pale);
-    text-decoration: none; letter-spacing: 0.05em;
-    display: inline-block;
-    position: relative;
-    transition: color 0.3s;
-  }
-  .contact-email::after {
-    content: '';
-    position: absolute; bottom: -4px; left: 0; right: 0;
-    height: 1px; background: var(--gold);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-  }
-  .contact-email:hover { color: var(--gold); }
-  .contact-email:hover::after { transform: scaleX(1); }
-  .contact-desc {
-    font-size: 13px; letter-spacing: 0.15em;
-    color: var(--text-dim); margin-top: 20px;
-  }
-  .social-links { display: flex; justify-content: center; gap: 32px; margin-top: 48px; }
-  .social-links a {
-    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--cream); opacity: 0.4; text-decoration: none;
-    transition: opacity 0.3s, color 0.3s;
-  }
-  .social-links a:hover { opacity: 1; color: var(--gold); }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-  /* ── FOOTER ── */
-  footer {
-    position: relative; z-index: 1;
-    padding: 32px 60px;
-    border-top: 1px solid rgba(201,168,76,0.1);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  footer span {
-    font-size: 11px; letter-spacing: 0.2em;
-    color: var(--text-dim);
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; font-weight: 300;
-    color: var(--gold); opacity: 0.5; letter-spacing: 0.15em;
-  }
+/* =====================
+   RESPONSIVE
+   ===================== */
 
-  /* ── DIVIDER ── */
-  .gold-divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0.25; margin: 0 60px;
-    width: calc(100% - 120px);
-  }
+/* Tablet: stack columns, horizontals full width, verticals side by side */
+@media(max-width:1024px){
+  nav{padding:20px 36px}
+  .hero{padding:0 36px}
+  section{padding:80px 36px}
+  .divider{margin:0 36px;width:calc(100% - 72px)}
+  .video-mixed-grid{grid-template-columns:1fr;gap:4px}
+  .vcol-left{flex-direction:row}
+  .video-card-vertical{aspect-ratio:9/16;flex:1}
+  .about-inner{grid-template-columns:1fr;gap:48px}
+  .poster-grid{grid-template-columns:repeat(2,1fr)}
+  footer{padding:24px 36px}
+}
 
-  /* ── REVEAL ANIMATION ── */
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.visible {
-    opacity: 1; transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 20px 28px; }
-    .hero { padding: 0 28px; }
-    section { padding: 70px 28px; }
-    .video-grid { grid-template-columns: 1fr; }
-    .video-card:first-child { aspect-ratio: 16/9; grid-column: 1; }
-    .poster-grid { grid-template-columns: repeat(2, 1fr); }
-    .about-inner { grid-template-columns: 1fr; gap: 40px; }
-    footer { padding: 24px 28px; }
-    .gold-divider { margin: 0 28px; width: calc(100% - 56px); }
-    .nav-links { display: none; }
-  }
+/* Mobile: single column, verticals still 9:16, horizontals 16:9 */
+@media(max-width:640px){
+  nav{padding:18px 20px}
+  .nav-links{display:none}
+  .hero{padding:0 20px}
+  .hero-scroll{left:20px}
+  section{padding:60px 20px}
+  .divider{margin:0 20px;width:calc(100% - 40px)}
+  .video-mixed-grid{display:flex;flex-direction:column;gap:4px}
+  .vcol-left{flex-direction:column;gap:4px}
+  .vcol-right{flex-direction:column;gap:4px}
+  .video-card-vertical{aspect-ratio:9/16;max-height:75vw}
+  .video-card-horizontal{aspect-ratio:16/9}
+  .poster-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .about-inner{grid-template-columns:1fr;gap:36px}
+  .social-links{flex-wrap:wrap;gap:20px}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px}
+}
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
 <div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-ring" id="ring"></div>
 
 <!-- NAV -->
 <nav>
@@ -432,195 +223,180 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg-orb orb1"></div>
-  <div class="hero-bg-orb orb2"></div>
-  <p class="hero-eyebrow">Creative Portfolio &#183; &#20010;&#20154;&#20316;&#21697;&#38598;</p>
-  <h1 class="hero-name">
-    &#20320;&#30340;&#21517;&#23383;<br>
-    <em>Your Name.</em>
-  </h1>
-  <p class="hero-subtitle">&#35270;&#35273;&#35774;&#35745;&#24072; &#183; &#24433;&#20687;&#21019;&#20316;&#32773;<br>&#29992;&#30011;&#38754;&#35762;&#36848;&#26377;&#28201;&#24230;&#30340;&#25925;&#20107;</p>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <p class="hero-eyebrow">Creative Portfolio &middot; &#20491;&#20154;&#20316;&#21697;&#38598;</p>
+  <h1 class="hero-name">&#20320;&#30340;&#21517;&#23383;<br><em>Your Name.</em></h1>
+  <p class="hero-sub">&#35270;&#35273;&#35774;&#35745;&#24072; &middot; &#24433;&#20687;&#21019;&#20316;&#32773;<br>&#29992;&#30011;&#38754;&#35763;&#36848;&#26377;&#28201;&#24230;&#30340;&#25925;&#20107;</p>
   <div class="hero-line"></div>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    <span>&#21521;&#19979;&#27983;&#35272;</span>
-  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>&#21521;&#19979;&#27983;&#35272;</span></div>
 </section>
 
-<div class="gold-divider"></div>
+<div class="divider"></div>
 
 <!-- VIDEOS -->
-<section id="videos">
-  <p class="section-label reveal">Video Works</p>
-  <h2 class="section-title reveal">&#35270;&#39057;<em>&#20316;&#21697;</em></h2>
+<section id="videos" class="video-section">
+  <p class="sec-label reveal">Video Works</p>
+  <h2 class="sec-title reveal">&#35270;&#39057;<em>&#20316;&#21697;</em></h2>
 
-  <div class="video-grid reveal">
+  <div class="video-mixed-grid reveal">
 
-    <!-- &#35270;&#39057;1&#65306;&#20027;&#35270;&#39057;&#65288;&#22823;&#26684;&#65292;&#21344;&#28385;&#20004;&#21015;&#65289; -->
-    <!-- 视频1 - 点击跳转到B站 -->
-    <a href="https://www.bilibili.com/video/BV1kg4y1U7u4" target="_blank" class="video-card" style="text-decoration:none;cursor:pointer;background:var(--navy-light);display:flex;align-items:center;justify-content:center;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gold);position:absolute;z-index:2;">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-      <div class="video-overlay">
-        <span class="video-tag">Brand Film</span>
-        <p class="video-title-text">作品标题 一</p>
+    <!-- 左列：2个竖屏视频 -->
+    <div class="vcol-left">
+
+      <div class="video-card-vertical">
+        <!-- 竖屏视频1：替换BV号 -->
+        <!-- <iframe src="https://player.bilibili.com/player.html?bvid=你的BV号&page=1" scrolling="no" allowfullscreen></iframe> -->
+        <div class="video-ph">
+          <svg width="32" height="48" viewBox="0 0 24 36" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="1" width="18" height="34" rx="3"/><line x1="9" y1="5" x2="15" y2="5"/><circle cx="12" cy="30" r="1.5"/></svg>
+          <span class="ph-label">&#31539;&#23631;&#35270;&#39057; 01</span>
+          <span style="font-size:10px;opacity:.5">9:16</span>
+        </div>
+        <div class="video-overlay">
+          <span class="vtag">Vertical &middot; &#31539;&#23631;</span>
+          <p class="vtitle">&#20316;&#21697;&#26631;&#39064; &#19968;</p>
+        </div>
       </div>
-    </a>
 
-    <!-- 视频2 -->
-    <a href="https://www.bilibili.com/video/BV1ps4y1H7qS" target="_blank" class="video-card" style="text-decoration:none;cursor:pointer;background:var(--navy-light);display:flex;align-items:center;justify-content:center;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gold);position:absolute;z-index:2;">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-      <div class="video-overlay">
-        <span class="video-tag">Short Film</span>
-        <p class="video-title-text">作品标题 二</p>
+      <div class="video-card-vertical">
+        <!-- 竖屏视频2：替换BV号 -->
+        <!-- <iframe src="https://player.bilibili.com/player.html?bvid=你的BV号&page=1" scrolling="no" allowfullscreen></iframe> -->
+        <div class="video-ph">
+          <svg width="32" height="48" viewBox="0 0 24 36" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="1" width="18" height="34" rx="3"/><line x1="9" y1="5" x2="15" y2="5"/><circle cx="12" cy="30" r="1.5"/></svg>
+          <span class="ph-label">&#31539;&#23631;&#35270;&#39057; 02</span>
+          <span style="font-size:10px;opacity:.5">9:16</span>
+        </div>
+        <div class="video-overlay">
+          <span class="vtag">Vertical &middot; &#31539;&#23631;</span>
+          <p class="vtitle">&#20316;&#21697;&#26631;&#39064; &#20108;</p>
+        </div>
       </div>
-    </a>
 
-    <!-- 视频3 -->
-    <a href="https://www.bilibili.com/video/BV1ss4y1H7xX" target="_blank" class="video-card" style="text-decoration:none;cursor:pointer;background:var(--navy-light);display:flex;align-items:center;justify-content:center;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gold);position:absolute;z-index:2;">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-      <div class="video-overlay">
-        <span class="video-tag">Short Film</span>
-        <p class="video-title-text">作品标题 三</p>
+    </div>
+
+    <!-- 右列：2个横屏视频 -->
+    <div class="vcol-right">
+
+      <div class="video-card-horizontal">
+        <!-- 横屏视频1：替换BV号 -->
+        <!-- <iframe src="https://player.bilibili.com/player.html?bvid=你的BV号&page=1" scrolling="no" allowfullscreen></iframe> -->
+        <div class="video-ph">
+          <svg width="48" height="32" viewBox="0 0 36 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="1" y="3" width="34" height="18" rx="3"/><polygon points="14,9 14,15 22,12"/></svg>
+          <span class="ph-label">&#26690;&#23631;&#35270;&#39057; 03</span>
+          <span style="font-size:10px;opacity:.5">16:9</span>
+        </div>
+        <div class="video-overlay">
+          <span class="vtag">Horizontal &middot; &#26690;&#23631;</span>
+          <p class="vtitle">&#20316;&#21697;&#26631;&#39064; &#19977;</p>
+        </div>
       </div>
-    </a>
 
-    <!-- 视频4 -->
-    <a href="https://www.bilibili.com/video/BV1m24y1a7k3" target="_blank" class="video-card" style="text-decoration:none;cursor:pointer;background:var(--navy-light);display:flex;align-items:center;justify-content:center;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--gold);position:absolute;z-index:2;">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
-      <div class="video-overlay">
-        <span class="video-tag">Documentary</span>
-        <p class="video-title-text">作品标题 四</p>
+      <div class="video-card-horizontal">
+        <!-- 横屏视频2：替换BV号 -->
+        <!-- <iframe src="https://player.bilibili.com/player.html?bvid=你的BV号&page=1" scrolling="no" allowfullscreen></iframe> -->
+        <div class="video-ph">
+          <svg width="48" height="32" viewBox="0 0 36 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="1" y="3" width="34" height="18" rx="3"/><polygon points="14,9 14,15 22,12"/></svg>
+          <span class="ph-label">&#26690;&#23631;&#35270;&#39057; 04</span>
+          <span style="font-size:10px;opacity:.5">16:9</span>
+        </div>
+        <div class="video-overlay">
+          <span class="vtag">Horizontal &middot; &#26690;&#23631;</span>
+          <p class="vtitle">&#20316;&#21697;&#26631;&#39064; &#22235;</p>
+        </div>
       </div>
-    </a>
 
+    </div>
   </div>
 </section>
 
-<div class="gold-divider"></div>
+<div class="divider"></div>
 
 <!-- POSTERS -->
 <section id="posters">
-  <p class="section-label reveal">Graphic Design</p>
-  <h2 class="section-title reveal">&#24179;&#38754;<em>&#28023;&#25253;</em></h2>
-
+  <p class="sec-label reveal">Graphic Design</p>
+  <h2 class="sec-title reveal">&#24179;&#38754;<em>&#28023;&#25253;</em></h2>
   <div class="poster-grid reveal">
 
-    <!-- &#28023;&#25253;1&#65306;&#25226; img src &#25913;&#25104;&#20320;&#30340;&#22270;&#29255;&#36335;&#24452; -->
     <div class="poster-card">
-      <!--
-      <img src="poster1.jpg" alt="&#28023;&#25253;&#20316;&#21697;&#19968;">
-      -->
-      <div class="poster-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-        <span>&#28023;&#25253; 01</span>
+      <!-- <img src="poster1.jpg" alt="poster1"> -->
+      <div class="poster-ph">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>poster 01</span>
       </div>
-      <div class="poster-overlay">
-        <p class="poster-num">No. 01</p>
-        <p class="poster-title-text">&#28023;&#25253;&#26631;&#39064;&#19968;</p>
-      </div>
+      <div class="poster-overlay"><p class="pnum">No. 01</p><p class="ptitle">&#28023;&#25253;&#26631;&#39064;&#19968;</p></div>
     </div>
 
-    <!-- &#28023;&#25253;2 -->
     <div class="poster-card">
-      <div class="poster-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-        <span>&#28023;&#25253; 02</span>
+      <!-- <img src="poster2.jpg" alt="poster2"> -->
+      <div class="poster-ph">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>poster 02</span>
       </div>
-      <div class="poster-overlay">
-        <p class="poster-num">No. 02</p>
-        <p class="poster-title-text">&#28023;&#25253;&#26631;&#39064;&#20108;</p>
-      </div>
+      <div class="poster-overlay"><p class="pnum">No. 02</p><p class="ptitle">&#28023;&#25253;&#26631;&#39064;&#20108;</p></div>
     </div>
 
-    <!-- &#28023;&#25253;3 -->
     <div class="poster-card">
-      <div class="poster-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-        <span>&#28023;&#25253; 03</span>
+      <!-- <img src="poster3.jpg" alt="poster3"> -->
+      <div class="poster-ph">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>poster 03</span>
       </div>
-      <div class="poster-overlay">
-        <p class="poster-num">No. 03</p>
-        <p class="poster-title-text">&#28023;&#25253;&#26631;&#39064;&#19977;</p>
-      </div>
+      <div class="poster-overlay"><p class="pnum">No. 03</p><p class="ptitle">&#28023;&#25253;&#26631;&#39064;&#19977;</p></div>
     </div>
 
-    <!-- &#28023;&#25253;4 -->
     <div class="poster-card">
-      <div class="poster-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-        <span>&#28023;&#25253; 04</span>
+      <!-- <img src="poster4.jpg" alt="poster4"> -->
+      <div class="poster-ph">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>poster 04</span>
       </div>
-      <div class="poster-overlay">
-        <p class="poster-num">No. 04</p>
-        <p class="poster-title-text">&#28023;&#25253;&#26631;&#39064;&#22235;</p>
-      </div>
+      <div class="poster-overlay"><p class="pnum">No. 04</p><p class="ptitle">&#28023;&#25253;&#26631;&#39064;&#22235;</p></div>
     </div>
 
   </div>
 </section>
 
-<div class="gold-divider"></div>
+<div class="divider"></div>
 
 <!-- ABOUT -->
 <section id="about">
-  <p class="section-label reveal">About Me</p>
-  <h2 class="section-title reveal">&#20851;&#20110;<em>&#25105;</em></h2>
+  <p class="sec-label reveal">About Me</p>
+  <h2 class="sec-title reveal">&#20851;&#20110;<em>&#25105;</em></h2>
   <div class="about-inner reveal">
     <div class="about-text">
       <p>&#20320;&#22909;&#65292;&#25105;&#26159;<strong>&#20320;&#30340;&#21517;&#23383;</strong>&#65292;&#19968;&#21517;&#19987;&#27880;&#20110;<strong>&#35270;&#35273;&#20256;&#36798;&#19982;&#24433;&#20687;&#21019;&#20316;</strong>&#30340;&#35774;&#35745;&#24072;&#12290;</p>
-      <p>&#22312;&#36807;&#21435;&#30340; X &#24180;&#37324;&#65292;&#25105;&#21442;&#19982;&#20102;&#21697;&#29260;&#23459;&#20256;&#29255;&#12289;&#21830;&#19994;&#28023;&#25253;&#35774;&#35745;&#12289;&#30701;&#29255;&#21465;&#20107;&#31561;&#22810;&#31867;&#39033;&#30446;&#65292;&#25797;&#38271;&#23558;&#21019;&#24847;&#27010;&#24565;&#36716;&#21270;&#20026;&#20855;&#26377;&#24863;&#26579;&#21147;&#30340;&#35270;&#35273;&#35821;&#35328;&#12290;</p>
-      <p>&#30446;&#21069;&#27491;&#22312;&#23547;&#27714;<strong>&#20869;&#23481;&#36816;&#33829; / &#21697;&#29260;&#35774;&#35745; / &#35270;&#39057;&#31574;&#21010;</strong>&#26041;&#21521;&#30340;&#26426;&#20250;&#65292;&#26399;&#24453;&#19982;&#20320;&#21512;&#20316;&#12290;</p>
+      <p>&#22312;&#36807;&#21435;&#30340; X &#24180;&#37324;&#65292;&#25105;&#21442;&#19982;&#20102;&#21697;&#29260;&#23459;&#20256;&#29255;&#12289;&#21830;&#19994;&#28023;&#25253;&#35774;&#35745;&#12289;&#30701;&#29255;&#21454;&#20107;&#31561;&#22810;&#31867;&#39033;&#30446;&#12290;</p>
+      <p>&#30446;&#21069;&#27491;&#22312;&#23531;&#27714;<strong>&#20869;&#23481;&#36816;&#33829; / &#21697;&#29260;&#35774;&#35745; / &#35270;&#39057;&#31574;&#21010;</strong>&#26041;&#21521;&#30340;&#26426;&#20250;&#65292;&#26399;&#24453;&#19982;&#20320;&#21512;&#20316;&#12290;</p>
     </div>
-    <div class="about-skills">
+    <div class="skills">
       <div class="skill-row">
-        <div class="skill-label"><span>&#35270;&#39057;&#21098;&#36753; &#183; Premiere / DaVinci</span><span>90%</span></div>
+        <div class="skill-lbl"><span>&#35270;&#39057;&#21066;&#36860; &middot; Premiere / DaVinci</span><span>90%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
       </div>
       <div class="skill-row">
-        <div class="skill-label"><span>&#24179;&#38754;&#35774;&#35745; &#183; Photoshop / AI</span><span>85%</span></div>
+        <div class="skill-lbl"><span>&#24179;&#38754;&#35774;&#35745; &middot; Photoshop / AI</span><span>85%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
       </div>
       <div class="skill-row">
-        <div class="skill-label"><span>&#21160;&#24577;&#22270;&#24418; &#183; After Effects</span><span>75%</span></div>
+        <div class="skill-lbl"><span>&#21160;&#24577;&#22270;&#24418; &middot; After Effects</span><span>75%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
       </div>
       <div class="skill-row">
-        <div class="skill-label"><span>&#21019;&#24847;&#31574;&#21010; &#183; &#33050;&#26412; / Brief</span><span>88%</span></div>
+        <div class="skill-lbl"><span>&#21019;&#24847;&#31574;&#21010; &middot; &#33073;&#26412; / Brief</span><span>88%</span></div>
         <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="gold-divider"></div>
+<div class="divider"></div>
 
 <!-- CONTACT -->
 <section id="contact" class="contact-section">
-  <p class="section-label reveal" style="justify-content:center">Contact</p>
-  <h2 class="section-title reveal" style="text-align:center">&#26399;&#24453;<em>&#21512;&#20316;</em></h2>
-  <!-- &#25226; your@email.com &#25913;&#25104;&#20320;&#30340;&#37038;&#31665; -->
-  <a class="contact-email reveal" href="/cdn-cgi/l/email-protection#92ebfde7e0d2f7fff3fbfebcf1fdff"><span class="__cf_email__" data-cfemail="e29b8d9790a2878f838b8ecc818d8f">[email&#160;protected]</span></a>
-  <p class="contact-desc reveal">&#27426;&#36814;HR&#21644;&#21697;&#29260;&#26041;&#25506;&#35752;&#21512;&#20316; &#183; &#24037;&#20316;&#24847;&#21521;&#35831;&#21457;&#37038;&#20214;&#25110;&#24494;&#20449;&#32852;&#31995;</p>
+  <p class="sec-label reveal" style="justify-content:center">Contact</p>
+  <h2 class="sec-title reveal" style="text-align:center">&#26399;&#24453;<em>&#21512;&#20316;</em></h2>
+  <a class="contact-email reveal" href="mailto:your@email.com">your@email.com</a>
+  <p class="contact-desc reveal">&#27426;&#36814;HR&#21644;&#21697;&#29260;&#26041;&#25506;&#35251;&#21512;&#20316; &middot; &#24037;&#20316;&#24847;&#21521;&#35831;&#21457;&#37038;&#20214;&#25110;&#24494;&#20449;&#32852;&#31995;</p>
   <div class="social-links reveal">
     <a href="#">&#24494;&#20449; WeChat</a>
     <a href="#">B&#31449; Bilibili</a>
@@ -629,62 +405,31 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <span>© 2025 &#20320;&#30340;&#21517;&#23383; &#183; All rights reserved</span>
+  <span>&copy; 2025 &#20320;&#30340;&#21517;&#23383; &middot; All rights reserved</span>
   <span class="footer-logo">Portfolio</span>
-  <span>Made with ♥</span>
+  <span>Made with &hearts;</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ── Cursor ──
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animCursor() {
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
-  }
-  animCursor();
-  document.querySelectorAll('a, button, .video-card, .poster-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '18px'; cursor.style.height = '18px';
-      ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '0.3';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '10px'; cursor.style.height = '10px';
-      ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.6';
-    });
-  });
-
-  // ── Scroll Reveal ──
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => obs.observe(el));
-
-  // ── Skill Bars ──
-  const skillObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
-          bar.style.width = bar.dataset.width + '%';
-        });
-        skillObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.about-skills').forEach(el => skillObs.observe(el));
-
-  // ── Smooth scroll ──
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    
+<script>
+// Cursor
+const cursor=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
+animRing();
+document.querySelectorAll('a,button,.video-card-vertical,.video-card-horizontal,.poster-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='18px';cursor.style.height='18px';ring.style.width='56px';ring.style.height='56px'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='10px';cursor.style.height='10px';ring.style.width='36px';ring.style.height='36px'});
+});
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+// Skill bars
+const sobs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.skill-fill').forEach(b=>{b.style.width=b.dataset.width+'%'});sobs.unobserve(e.target)}})},{threshold:.3});
+document.querySelectorAll('.skills').forEach(el=>sobs.observe(el));
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}})});
+</script>
+</body>
+</html>
